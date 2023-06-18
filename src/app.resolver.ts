@@ -6,6 +6,6 @@ export class AppResolver {
   // to check the connection
   @Query(() => CheckConnectionDTO)
   checkServer(): CheckConnectionDTO {
-    return { connectionStatus: 'connected with graphql' };
+    return { connectionStatus: 'Server is up and running!' };
   }
 }
