@@ -13,6 +13,6 @@ export class loginResponseDTO {
   @Field()
   loginMessage: string;
 
-  @Field(() => UserDecoderData)
+  @Field(() => UserDecoderData, { nullable: true })
   userData: UserDecoderData;
 }
