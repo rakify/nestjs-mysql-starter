@@ -1,3 +1,4 @@
+import { ParseIntPipe, UseGuards } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { constant } from 'core/default';
 import { User } from 'core/custom_decoder/user.decoder';
@@ -7,6 +8,9 @@ import { RegisterUserDTO } from './dto/register-user.input';
 import { UserService } from './user.service';
 import { LogOutUserDTO } from './dto/logout-user.input';
 import { UserDecoderData, loginResponseDTO } from './dto/login-response.input';
+import { GQLAuthGuard } from 'modules/auth/guard/gql_auth.guard';
+import { ActivateSession } from 'modules/auth/guard/activate.session.guard';
+import { IsAuthenticated } from 'modules/auth/guard/isAuthenticated.guard';
 
 @Resolver()
 export class UserResolver {
@@ -23,7 +27,7 @@ export class UserResolver {
   }
 
   // login into the system
-  // @UseGuards(GQLAuthGuard, ActivateSession, IsAuthenticated)
+  @UseGuards(GQLAuthGuard, ActivateSession, IsAuthenticated)
   @Query(() => loginResponseDTO, { description: 'login into the system' })
   async userLogin(
     @Args('UserLoginData') userLoginData: LoginUserDTO,
