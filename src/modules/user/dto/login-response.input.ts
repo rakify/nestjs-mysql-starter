@@ -1,5 +1,5 @@
 import { Field, ObjectType, PickType } from '@nestjs/graphql';
-import { UserEntity } from 'database/entity/user.entity';
+import { UserEntity } from '../user.entity';
 
 @ObjectType()
 export class UserDecoderData extends PickType(UserEntity, [

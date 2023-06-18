@@ -1,8 +1,5 @@
 import * as bcrypt from 'bcrypt';
-import * as dotenv from 'dotenv';
-import { constant } from './constant';
-
-dotenv.config();
+import { constant } from '../default';
 
 export interface IGenerateToken {
   ID: number;

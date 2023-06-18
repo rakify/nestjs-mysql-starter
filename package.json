@@ -19,9 +19,9 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
-    "migration-gen": "npm run typeorm -- -d src/config/datasource.config.ts migration:generate src/database/migration/entities-final",
-    "migration-run": "npm run typeorm migration:run -- -d src/config/datasource.config.ts",
-    "schema-drop": "npm run typeorm schema:drop -- -d src/config/datasource.config.ts"
+    "migration-gen": "npm run typeorm -- -d src/core/config/datasource.config.ts migration:generate src/core/migration/entities-final",
+    "migration-run": "npm run typeorm migration:run -- -d src/core/config/datasource.config.ts",
+    "schema-drop": "npm run typeorm schema:drop -- -d src/core/config/datasource.config.ts"
   },
   "dependencies": {
     "@apollo/server": "^4.7.4",

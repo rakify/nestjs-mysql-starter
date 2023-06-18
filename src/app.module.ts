@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { MysqlDataSource } from './config/database.config';
-import { GraphQLConfig } from './config/graphql.config';
-import { UserModule } from './user/user.module';
+import { MysqlDataSource } from './core/config/database.config';
+import { GraphQLConfig } from './core/config/graphql.config';
+import { UserModule } from './modules/user/user.module';
 import { AppResolver } from 'app.resolver';
 @Module({
   imports: [

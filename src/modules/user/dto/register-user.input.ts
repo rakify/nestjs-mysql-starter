@@ -1,5 +1,5 @@
 import { Field, InputType } from '@nestjs/graphql';
-import { constant } from 'common/constant';
+import { constant } from 'core/default';
 import { IsString, Length, Matches } from 'class-validator';
 
 @InputType()

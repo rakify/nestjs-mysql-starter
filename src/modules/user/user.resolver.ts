@@ -1,9 +1,9 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { constant } from 'common/constant';
-import { User } from 'custom_decoder/user.decoder';
-import { UserEntity } from 'database/entity/user.entity';
-import { LoginUserDTO } from 'user/dto/login-user.input';
-import { RegisterUserDTO } from 'user/dto/register-user.input';
+import { constant } from 'core/default';
+import { User } from 'core/custom_decoder/user.decoder';
+import { UserEntity } from './user.entity';
+import { LoginUserDTO } from './dto/login-user.input';
+import { RegisterUserDTO } from './dto/register-user.input';
 import { UserService } from './user.service';
 import { LogOutUserDTO } from './dto/logout-user.input';
 import { UserDecoderData, loginResponseDTO } from './dto/login-response.input';
