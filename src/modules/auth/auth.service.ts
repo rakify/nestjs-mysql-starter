@@ -44,6 +44,7 @@ export class AuthService {
     const payload = { email: newUser.email, accessRole: newUser.accessRole };
     const access_token = await this.jwtService.signAsync(payload);
     return {
+      message: constant.REGISTER_SUCCESSFUL,
       userData: newUser,
       access_token,
     };
@@ -52,7 +53,7 @@ export class AuthService {
   // login into the system
   async signIn(email: string, password: string): Promise<any> {
     const lowerEmail = email.toLowerCase();
-    const user = await this.userService.findUserByEmail(lowerEmail);
+    const user = await this.userService.findUser({ email: lowerEmail });
     const isValidPassword = await comparePassword(password, user.password);
     if (!isValidPassword) {
       throw new UnauthorizedException(constant.PROVIDED_WRONG_PASSWORD);
@@ -60,6 +61,7 @@ export class AuthService {
     const payload = { email: user.email, accessRole: user.accessRole };
     const access_token = await this.jwtService.signAsync(payload);
     return {
+      message: constant.LOGIN_SUCCESSFUL,
       userData: user,
       access_token,
     };

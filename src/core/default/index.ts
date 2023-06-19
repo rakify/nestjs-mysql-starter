@@ -5,6 +5,7 @@ export const constant = {
   PROVIDED_WRONG_PASSWORD: 'Provided email or password is in-correct.',
   LOGIN_SUCCESSFUL: 'You are logged in successfully.',
   REGISTER_SUCCESSFUL: 'Your account has been created successfully.',
+  UPDATE_USER_SUCCESSFUL: 'User information has been updated successfully.',
   UNAUTHORIZED_ACCESS_MESSAGE: 'Please login first to perform this operation.',
   LOGOUT_SUCCESSFUL:
     'You have been logout, please login again to gain the access.',
