@@ -11,8 +11,8 @@ export interface IGenerateToken {
 const hashPassword = (plainPassword: string) =>
   bcrypt.hash(plainPassword, constant.HASH_SALT_COUNT);
 
-const comparePassword = (plainPassword: string, hasPassword: string) =>
-  bcrypt.compare(plainPassword, hasPassword);
+const comparePassword = (plainPassword: string, hashPassword: string) =>
+  bcrypt.compare(plainPassword, hashPassword);
 
 const formatter = (value: number) => {
   const stringValue = Number(value).toFixed(2);

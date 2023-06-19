@@ -6,7 +6,7 @@ import { UserEntity } from './user.entity';
 
 @Module({
   imports: [TypeOrmModule.forFeature([UserEntity])],
-  exports: [UserService],
+  exports: [UserService], // we will use it in AuthService
   providers: [UserResolver, UserService],
 })
 export class UserModule {}

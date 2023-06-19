@@ -6,6 +6,7 @@ import {
   Column,
 } from 'typeorm';
 import { Field, ID, ObjectType } from '@nestjs/graphql';
+import { constant } from 'core/default';
 
 @ObjectType()
 export abstract class ExtendedBaseEntity extends BaseEntity {
@@ -14,18 +15,18 @@ export abstract class ExtendedBaseEntity extends BaseEntity {
   id: string;
 
   @Field()
-  @CreateDateColumn({ name: 'created_at', type: 'datetime' })
+  @CreateDateColumn()
   createdAt: Date;
 
   @Field()
-  @Column({ type: 'varchar', length: 36 })
+  @Column({ type: 'varchar', length: 36, default: constant.DEFAULT_USER })
   createdBy: string;
 
   @Field()
-  @UpdateDateColumn({ name: 'updated_at', type: 'datetime' })
+  @UpdateDateColumn()
   updatedAt: Date;
 
   @Field()
-  @Column({ type: 'varchar', length: 36 })
+  @Column({ type: 'varchar', length: 36, default: constant.DEFAULT_USER })
   updatedBy: string;
 }
