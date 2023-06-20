@@ -1,20 +1,23 @@
 import { UserAccessRole, UserEntity } from 'modules/user/user.entity';
 
 /**
- * isSalesman
- * @param { accessRole } User
+ * isSalesman, SuperAdmin has access too
+ * @param accessRole
  * @return boolean
  */
-export function isSalesman({ accessRole }: UserEntity): boolean {
-  return accessRole === UserAccessRole.Salesman;
+export function isSalesman(accessRole: UserAccessRole): boolean {
+  return (
+    accessRole === UserAccessRole.Salesman ||
+    accessRole === UserAccessRole.SuperAdmin
+  );
 }
 
 /**
- * isAdmin
- * @param { accessRole } User
+ * isAdmin, SuperAdmin has access too
+ * @param accessRole
  * @return boolean
  */
-export function isAdmin({ accessRole }: UserEntity): boolean {
+export function isAdmin(accessRole: UserAccessRole): boolean {
   return (
     accessRole === UserAccessRole.Admin ||
     accessRole === UserAccessRole.SuperAdmin
@@ -23,7 +26,7 @@ export function isAdmin({ accessRole }: UserEntity): boolean {
 
 /**
  * isSuperAdmin Checking if requested user is an Super admin
- * @param { accessRole } User
+ * @param accessRole
  * @return boolean
  */
 export function isSuperAdmin({ accessRole }: UserEntity): boolean {

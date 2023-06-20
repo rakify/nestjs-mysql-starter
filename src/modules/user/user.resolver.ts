@@ -4,11 +4,14 @@ import { UserService } from './user.service';
 import { LogOutUserDTO } from './dto/logout-user.input';
 import { UpdateUserResponseDTO } from './dto/update-user-response.input';
 import { UpdateUserPersonalInfoInput } from './dto/update-user-personal-info.input';
+import { UseGuards } from '@nestjs/common';
+import { AuthGuard } from 'modules/auth/guards/auth.guard';
 @Resolver()
 export class UserResolver {
   constructor(private readonly userService: UserService) {}
 
   // update user personal info
+  @UseGuards(AuthGuard)
   @Mutation(() => UpdateUserResponseDTO, {
     description: 'to update user personal informations',
   })

@@ -15,6 +15,6 @@ import { AuthResolver } from './auth.resolver';
     }),
   ],
   providers: [AuthService, AuthResolver],
-  exports: [AuthService],
+  exports: [AuthService], // we will use it in every module where authentication is required
 })
 export class AuthModule {}
