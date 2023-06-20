@@ -5,7 +5,6 @@ import { Repository } from 'typeorm';
 import { constant } from 'core/default';
 import { UpdateUserPersonalInfoInput } from './dto/update-user-personal-info.input';
 import { UpdateUserResponseDTO } from './dto/update-user-response.input';
-import { NotFoundError } from 'rxjs';
 
 @Injectable()
 export class UserService {

@@ -6,7 +6,7 @@ import { UpdateUserResponseDTO } from './dto/update-user-response.input';
 import { UpdateUserPersonalInfoInput } from './dto/update-user-personal-info.input';
 import { UseGuards } from '@nestjs/common';
 import { AuthGuard } from 'modules/auth/guards/auth.guard';
-import { CurrentUser } from 'modules/auth/guards/current-user.decoder';
+import { CurrentUser } from 'modules/auth/decorator/current-user.decoder';
 import { UserEntity } from './user.entity';
 @Resolver()
 export class UserResolver {

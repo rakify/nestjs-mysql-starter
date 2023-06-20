@@ -5,7 +5,7 @@ import { LoginResponseDTO, ReturnUserData } from './dto/login-response.input';
 import { RegisterUserDTO } from './dto/register-user.input';
 import { UseGuards } from '@nestjs/common';
 import { AuthGuard } from './guards/auth.guard';
-import { CurrentUser } from './guards/current-user.decoder';
+import { CurrentUser } from './decorator/current-user.decoder';
 import { UserEntity } from 'modules/user/user.entity';
 
 @Resolver()
