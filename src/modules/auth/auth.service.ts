@@ -43,7 +43,7 @@ export class AuthService {
     const payload = { email: newUser.email, accessRole: newUser.accessRole };
     const access_token = await this.jwtService.signAsync(payload);
     return {
-      message: constant.REGISTER_SUCCESSFUL,
+      message: constant.REGISTRATION_SUCCESSFUL,
       userData: newUser,
       access_token,
     };
