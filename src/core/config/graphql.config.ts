@@ -10,4 +10,9 @@ export const GraphQLConfig: ApolloDriverConfig = {
       'request.credentials': 'include',
     },
   },
+  context: ({ req }) => {
+    return {
+      token: req.headers.token || null,
+    };
+  },
 };

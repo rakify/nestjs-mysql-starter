@@ -6,7 +6,6 @@ import {
 import { JwtService } from '@nestjs/jwt';
 import { constant } from 'core/default';
 import { comparePassword, hashPassword } from 'core/helper';
-import { UserService } from 'modules/user/user.service';
 import { RegisterUserDTO } from './dto/register-user.input';
 import { UserEntity } from 'modules/user/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -17,7 +16,6 @@ export class AuthService {
   constructor(
     @InjectRepository(UserEntity)
     private userRepository: Repository<UserEntity>,
-    private userService: UserService,
     private jwtService: JwtService,
   ) {}
 
@@ -52,8 +50,7 @@ export class AuthService {
 
   // login into the system
   async signIn(email: string, password: string): Promise<any> {
-    const lowerEmail = email.toLowerCase();
-    const user = await this.userService.findUser({ email: lowerEmail });
+    const user = await this.findByEmail(email.toLowerCase());
     const isValidPassword = await comparePassword(password, user.password);
     if (!isValidPassword) {
       throw new UnauthorizedException(constant.PROVIDED_WRONG_PASSWORD);
@@ -65,5 +62,28 @@ export class AuthService {
       userData: user,
       access_token,
     };
+  }
+
+  async getCurrentUser(user: any): Promise<any> {
+    const loggedUser = user;
+
+    delete loggedUser.password;
+    return loggedUser;
+  }
+
+  async findByEmail(email: string) {
+    return await UserEntity.findOne({
+      where: {
+        email: email,
+      },
+    });
+  }
+
+  async findbyId(id: string) {
+    return await UserEntity.findOne({
+      where: {
+        id: id,
+      },
+    });
   }
 }
