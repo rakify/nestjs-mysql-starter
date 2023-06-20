@@ -1,7 +1,7 @@
 import { AuthService } from './auth.service';
 import { Args, Mutation, Resolver, Query } from '@nestjs/graphql';
 import { RegisterResponseDTO } from './dto/register-response.input';
-import { LoggedInUserData, LoginResponseDTO } from './dto/login-response.input';
+import { LoginResponseDTO, ReturnUserData } from './dto/login-response.input';
 import { RegisterUserDTO } from './dto/register-user.input';
 import { UseGuards } from '@nestjs/common';
 import { AuthGuard } from './guards/auth.guard';
@@ -33,8 +33,8 @@ export class AuthResolver {
   }
 
   @UseGuards(AuthGuard)
-  @Query(() => LoggedInUserData)
-  async getLoggedUser(@CurrentUser() user: UserEntity) {
-    return this.authService.getCurrentUser(user);
+  @Query(() => ReturnUserData)
+  async getLoggedUser(@CurrentUser() reqUser: UserEntity) {
+    return this.authService.getCurrentUser(reqUser);
   }
 }

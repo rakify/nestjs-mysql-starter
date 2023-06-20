@@ -10,6 +10,7 @@ import { RegisterUserDTO } from './dto/register-user.input';
 import { UserEntity } from 'modules/user/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { ReturnUserData } from './dto/login-response.input';
 
 @Injectable()
 export class AuthService {
@@ -51,10 +52,15 @@ export class AuthService {
   // login into the system
   async signIn(email: string, password: string): Promise<any> {
     const user = await this.findByEmail(email.toLowerCase());
+    if (!user) {
+      throw new UnauthorizedException(constant.PROVIDED_WRONG_EMAIL);
+    }
+
     const isValidPassword = await comparePassword(password, user.password);
     if (!isValidPassword) {
       throw new UnauthorizedException(constant.PROVIDED_WRONG_PASSWORD);
     }
+
     const payload = { email: user.email, accessRole: user.accessRole };
     const access_token = await this.jwtService.signAsync(payload);
     return {
@@ -64,11 +70,8 @@ export class AuthService {
     };
   }
 
-  async getCurrentUser(user: any): Promise<any> {
-    const loggedUser = user;
-
-    delete loggedUser.password;
-    return loggedUser;
+  async getCurrentUser(reqUser: UserEntity): Promise<ReturnUserData> {
+    return reqUser;
   }
 
   async findByEmail(email: string) {
