@@ -2,7 +2,7 @@ import { Field, InputType } from '@nestjs/graphql';
 import { IsEmail, IsString } from 'class-validator';
 
 @InputType()
-export class RegisterUserDTO {
+export class RegisterUserInput {
   @Field({ nullable: false, description: 'user input value for Email' })
   @IsEmail()
   email: string;

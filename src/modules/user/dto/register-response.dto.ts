@@ -1,5 +1,5 @@
 import { Field, ObjectType, OmitType } from '@nestjs/graphql';
-import { UserEntity } from '../../user/user.entity';
+import { UserEntity } from '../user.entity';
 
 @ObjectType()
 export class RegisteredUserData extends OmitType(UserEntity, [

@@ -1,4 +1,5 @@
-import { UserAccessRole, UserEntity } from 'modules/user/user.entity';
+import { UserEntity } from 'modules/user/user.entity';
+import { UserAccessRole } from 'modules/user/user.interface';
 
 /**
  * isSalesman, SuperAdmin has access too

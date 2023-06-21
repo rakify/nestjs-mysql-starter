@@ -1,15 +1,15 @@
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { GqlExecutionContext } from '@nestjs/graphql';
 import { UserEntity } from 'modules/user/user.entity';
-import { AuthService } from '../auth.service';
 import { JwtService } from '@nestjs/jwt';
-import { isAdmin } from 'core/utils/authorize';
+import { isAdmin } from '../authorize';
+import { UserService } from 'modules/user/user.service';
 
 // this guard checks if requested user is an admin
 @Injectable()
 export class AdminGuard implements CanActivate {
   constructor(
-    private authService: AuthService,
+    private userService: UserService,
     private jwtService: JwtService,
   ) {}
 
@@ -26,7 +26,7 @@ export class AdminGuard implements CanActivate {
     if (!isAdmin(role)) return false;
 
     const user: UserEntity | undefined | null =
-      await this.authService.findByEmail(result['email']);
+      await this.userService.findByEmail(result['email']);
     // Checking if the user exists and isActive
     if (user && !user.isActive) return false;
 
