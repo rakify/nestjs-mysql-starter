@@ -1,14 +1,19 @@
-import * as dotenv from 'dotenv';
+import {
+  DB_DATABASE,
+  DB_HOST,
+  DB_PASSWORD,
+  DB_PORT,
+  DB_USERNAME,
+} from '../environments/index';
 import { MysqlConnectionOptions } from 'typeorm/driver/mysql/MysqlConnectionOptions';
 
-dotenv.config();
 export const MysqlDataSource: MysqlConnectionOptions = {
   type: 'mysql',
-  host: process.env.DB_HOST,
-  port: Number(process.env.DB_POST),
-  username: process.env.DB_USERNAME,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_DATABASE,
+  host: DB_HOST,
+  port: Number(DB_PORT),
+  username: DB_USERNAME,
+  password: DB_PASSWORD,
+  database: DB_DATABASE,
   entities: ['dist/modules/**/*.entity.js'],
   migrations: ['dist/core/migration/*.js'],
   synchronize: false,
