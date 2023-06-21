@@ -1,4 +1,4 @@
-# NestJs Template (Graphql version)
+# NestJs Template (Graphql+Typeorm version)
 
 This is a starter template for project that needs nestJS backend. This version uses graphql and typeorm with mysql. This follows best practice that is mentioned at the [NestJS documentation](https://docs.nestjs.com/graphql/quick-start). This package handled authentication using `@nestjs/jwt` and seeding is handled by `nestjs-seeder`.
 
