@@ -1,7 +1,7 @@
 {
-  "name": "nest-starter",
+  "name": "nestjs-starter",
   "version": "0.0.1",
-  "description": "",
+  "description": "a nestjs starter pack with complete auth and seeding scenerio, other packages are graphql, typeorm, jwt, bcrypt, mysql.",
   "author": "",
   "private": true,
   "license": "UNLICENSED",
