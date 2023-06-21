@@ -21,7 +21,9 @@
     "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
     "migration-gen": "npm run typeorm -- -d src/core/config/datasource.config.ts migration:generate src/core/migration/entities-final",
     "migration-run": "npm run typeorm migration:run -- -d src/core/config/datasource.config.ts",
-    "schema-drop": "npm run typeorm schema:drop -- -d src/core/config/datasource.config.ts"
+    "schema-drop": "npm run typeorm schema:drop -- -d src/core/config/datasource.config.ts",
+    "seed": "node dist/core/seeders/seeder",
+    "seed-refresh": "node dist/core/seeders/seeder --refresh"
   },
   "dependencies": {
     "@apollo/server": "^4.7.4",
@@ -51,6 +53,7 @@
     "@types/jest": "^29.5.2",
     "@types/node": "^20.3.1",
     "@types/supertest": "^2.0.12",
+    "@types/uuid": "^9.0.2",
     "@typescript-eslint/eslint-plugin": "^5.59.11",
     "@typescript-eslint/parser": "^5.59.11",
     "eslint": "^8.42.0",
