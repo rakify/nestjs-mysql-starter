@@ -92,21 +92,22 @@ export class UserService {
     return reqUser;
   }
 
-  // update user by id when user exists
+  // update logged in user personal info
   async updateUserPersonalInfo(
-    id: string,
     input: UpdateUserPersonalInfoInput,
     reqUser: UserEntity,
   ) {
-    if (reqUser.id !== id)
-      throw new BadRequestException(constant.UNAUTHORIZED_OWNER_MESSAGE);
+    // if input contains password hash it
+    if (input.password) {
+      const hashPasswordValue = await this.authService.hashPassword(
+        input.password,
+      );
+      input.password = hashPasswordValue;
+    }
 
-    const user = await this.findbyId(id);
-    if (!user) throw new Error(constant.USER_NOT_EXIST);
+    Object.assign(reqUser, { ...input });
 
-    Object.assign(user, { ...input });
-
-    const updatedUser = await user.save();
+    const updatedUser = await reqUser.save();
 
     const response: UpdateUserResponseDTO = {
       message: constant.UPDATE_USER_SUCCESSFUL,
