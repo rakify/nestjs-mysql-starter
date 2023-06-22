@@ -25,12 +25,7 @@ export class UserEntity extends ExtendedBaseEntity {
   @Column({ type: 'varchar', unique: true })
   email: string;
 
-  @Factory(
-    (faker, ctx) =>
-      ctx.password
-        ? ctx.password
-        : '$2b$10$/3sioxoWNCCo3g/efr.cXuuXNvUWcPJM/PoBmKNVcHTaXtvgASF7C', //1234
-  )
+  @Factory('$2b$10$/3sioxoWNCCo3g/efr.cXuuXNvUWcPJM/PoBmKNVcHTaXtvgASF7C') // You have to make change here
   @Field()
   @Column({
     name: 'password',
