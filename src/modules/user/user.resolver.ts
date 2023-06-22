@@ -1,4 +1,4 @@
-import { Args, ID, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { constant } from 'core/default';
 import { UserService } from './user.service';
 import { UseGuards } from '@nestjs/common';
@@ -52,11 +52,10 @@ export class UserResolver {
     description: 'to update user personal informations',
   })
   updateUserPersonalInfo(
-    @Args('id', { type: () => ID }) id: string,
     @Args('input') input: UpdateUserPersonalInfoInput,
     @CurrentUser() reqUser: UserEntity,
   ): Promise<UpdateUserResponseDTO> {
-    return this.userService.updateUserPersonalInfo(id, input, reqUser);
+    return this.userService.updateUserPersonalInfo(input, reqUser);
   }
   // logout from the system
   @Query(() => LogoutResponseDTO, { description: 'logout to the system' })
