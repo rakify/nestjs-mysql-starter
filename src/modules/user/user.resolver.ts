@@ -8,8 +8,8 @@ import { UserEntity } from './user.entity';
 // DTOS
 import { RegisterResponseDTO } from './dto/register-response.dto';
 import { RegisterUserInput } from './dto/register-user.input';
-import { LoginResponseDTO, ReturnUserData } from './dto/login-response.input';
-import { LogOutUserDTO } from './dto/logout-user.dto';
+import { LoginResponseDTO, ReturnUserData } from './dto/login-response.dto';
+import { LogOutUserDTO } from './dto/logout-response.dto';
 import { UpdateUserResponseDTO } from './dto/update-user-response.dto';
 import { UpdateUserPersonalInfoInput } from './dto/update-user-personal-info.input';
 

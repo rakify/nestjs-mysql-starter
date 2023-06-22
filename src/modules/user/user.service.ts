@@ -11,7 +11,7 @@ import { AuthService } from 'modules/auth/auth.service';
 import { IUserAccessTokenPayload } from './user.interface';
 import { UpdateUserPersonalInfoInput } from './dto/update-user-personal-info.input';
 import { UpdateUserResponseDTO } from './dto/update-user-response.dto';
-import { ReturnUserData } from './dto/login-response.input';
+import { ReturnUserData } from './dto/login-response.dto';
 import { RegisterUserInput } from './dto/register-user.input';
 
 @Injectable()
