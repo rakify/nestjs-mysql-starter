@@ -9,10 +9,14 @@ import { Repository } from 'typeorm';
 import { constant } from 'core/default';
 import { AuthService } from 'modules/auth/auth.service';
 import { IUserAccessTokenPayload } from './user.interface';
-import { UpdateUserPersonalInfoInput } from './dto/update-user-personal-info.input';
-import { UpdateUserResponseDTO } from './dto/update-user-response.dto';
-import { ReturnUserData } from './dto/login-response.input';
-import { RegisterUserInput } from './dto/register-user.input';
+import {
+  LoginResponseDTO,
+  RegisterResponseDTO,
+  RegisterUserInput,
+  ReturnUserData,
+  UpdateUserPersonalInfoInput,
+  UpdateUserResponseDTO,
+} from './dto';
 
 @Injectable()
 export class UserService {
@@ -23,7 +27,9 @@ export class UserService {
   ) {}
 
   // register the user into the system
-  async registerUser(registerUserData: RegisterUserInput): Promise<any> {
+  async registerUser(
+    registerUserData: RegisterUserInput,
+  ): Promise<RegisterResponseDTO> {
     const { email, password } = registerUserData;
     const lowerEmail = email.toLowerCase();
 
@@ -58,7 +64,7 @@ export class UserService {
   }
 
   // login into the system
-  async loginUser(email: string, password: string): Promise<any> {
+  async loginUser(email: string, password: string): Promise<LoginResponseDTO> {
     const user = await this.findByEmail(email.toLowerCase());
     if (!user) {
       throw new UnauthorizedException(constant.PROVIDED_WRONG_EMAIL);
@@ -86,21 +92,22 @@ export class UserService {
     return reqUser;
   }
 
-  // update user by id when user exists
+  // update logged in user personal info
   async updateUserPersonalInfo(
-    id: string,
     input: UpdateUserPersonalInfoInput,
     reqUser: UserEntity,
   ) {
-    if (reqUser.id !== id)
-      throw new BadRequestException(constant.UNAUTHORIZED_OWNER_MESSAGE);
+    // if input contains password hash it
+    if (input.password) {
+      const hashPasswordValue = await this.authService.hashPassword(
+        input.password,
+      );
+      input.password = hashPasswordValue;
+    }
 
-    const user = await this.findbyId(id);
-    if (!user) throw new Error(constant.USER_NOT_EXIST);
+    Object.assign(reqUser, { ...input });
 
-    Object.assign(user, { ...input });
-
-    const updatedUser = await user.save();
+    const updatedUser = await reqUser.save();
 
     const response: UpdateUserResponseDTO = {
       message: constant.UPDATE_USER_SUCCESSFUL,

@@ -8,8 +8,8 @@ import { AppResolver } from 'app.resolver';
 import { AuthModule } from 'modules/auth/auth.module';
 @Module({
   imports: [
-    TypeOrmModule.forRoot(MysqlDataSource),
     GraphQLModule.forRoot(GraphQLConfig),
+    TypeOrmModule.forRoot(MysqlDataSource),
     UserModule,
     AuthModule,
   ],
